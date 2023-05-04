@@ -13,34 +13,16 @@ let data = fetch('http://localhost:5678/api/works')
         divOfProjects.appendChild(imageDiv);
     });
 
-   /* fetch ('http://localhost:5678/api/works')
+    fetch ('http://localhost:5678/api/categories')
         .then(response => (response.json()))
         .then((categories) => {
             console.log(categories);
+            
 
-            const filter1 = document.querySelector(".filter")
-
-            filter1.addEventListener("click", function(){
-                const
-            })
-        });*/
+        });
 
  });
 
  const filters = document.querySelectorAll('.filters div');
 
 
- [
-    {
-      "id": 1,
-      "name": "Objets"
-    },
-    {
-      "id": 2,
-      "name": "Appartements"
-    },
-    {
-      "id": 3,
-      "name": "Hotels & restaurants"
-    }
-  ]
