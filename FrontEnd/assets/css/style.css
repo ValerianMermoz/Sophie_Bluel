@@ -131,19 +131,23 @@ li:hover {
 	display : flex;
 	flex-direction:row;
 	justify-content:center;
-	
 	gap: 10px;
+	padding:30px 0 30px;
 }
 
 .filter {
+	width: unset;
+	display: flex;
+	align-items: center;
+	justify-content:center;
 	font-family: 'Syne';
+	font-size:16px;
 	font-weight: 700;
 	color: #1D6154;
 	background-color: transparent;
-	width: 25%;
-	text-align: center;
-	border-radius: 60px ;
-
+	padding:10px 20px 10px 20px;
+	border-radius: 60px;
+   
 	&:focus{
 	color: white;
 	background-color: #1D6154;
