@@ -1,55 +1,104 @@
-//Recuperation des projets depuis l'api fourni par le backend 
-fetch('http://localhost:5678/api/works')
- .then((response) => {
-    if(response.ok) return response.json();
- })
- .then ((data)=> {
-    console.table(data);
-   
-    const gallery = document.querySelector('.gallery');
-    data.forEach(item => {
-        const divOfProjects = document.createElement('div');
-        const imageDiv = document.createElement('img');
-        imageDiv.src = item.imageUrl;
-        
-        const figCaption = document.createElement('figcaption');
-        figCaption.textContent = item.title;
+const gallery = document.querySelector(".gallery");
 
-        divOfProjects.appendChild(imageDiv);
-        divOfProjects.appendChild(figCaption);
-        gallery.appendChild(divOfProjects);
-    });
-       
-    }).catch((error) => {
-        alert("Une erreur est survenue sur le site ! Veuillez contacter l'administrateur! ");
-        console.log(error);
-    });
+//Fonction qui crée la gallerie d'images
+function Gallery(data) {
+  for (let i = 0; i < data.length; i++) {
+    const divOfProjects = document.createElement("div");
+    const imageDiv = document.createElement("img");
+    imageDiv.src = data[i].imageUrl;
 
-    // Charger la liste des categories 
- fetch('http://localhost:5678/api/categories')
- .then((response) => {
-    if(response.ok) return response.json();
- })
- .then ((data)=> {
-    console.table(data);
-   
-    const filters = document.querySelector('.filters');
-    data.forEach(item => {
-      const boutonObjet = document.getElementById("1")
+    const figCaption = document.createElement("figcaption");
+    figCaption.textContent = data[i].title;
 
-      boutonObjet.addEventListener("click", function() {
-         const objetsFiltrees = item.filter(function (data) {
-            return data.categoryId == "1";
-         });
-         console.log(data);
+    divOfProjects.appendChild(imageDiv);
+    divOfProjects.appendChild(figCaption);
+    gallery.appendChild(divOfProjects);
+  }
+
+  //Listener filtre uniquement les objets
+}
+
+//Recuperation des projets depuis l'api fourni par le backend
+async function generategallery() {
+  await fetch("http://localhost:5678/api/works", {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+    },
+  })
+    .then((response) => {
+      if (response.ok) return response.json();
+    })
+    .then((data) => {
+      console.table(data);
+      Gallery(data);
+      const Tous = document.getElementById("0");
+      Tous.addEventListener("click", function () {
+        gallery.innerHTML = "";
+        Gallery(data);
       });
-       // ajouter les boutons filters
+      const Objets = document.getElementById("1");
+      Objets.addEventListener("click", function () {
+        const filter = data.filter((datas) => datas.categoryId === 1);
+        gallery.innerHTML = "";
+        Gallery(filter);
+        console.log(filter);
+      });
+      const Appartements = document.getElementById("2");
+      Appartements.addEventListener("click", function () {
+        const appartements = data.filter((datas) => datas.categoryId === 2);
+        gallery.innerHTML = "";
+        Gallery(appartements);
+        console.log(Appartements);
+      });
+      const Hôtels = document.getElementById("3");
+      Hôtels.addEventListener("click", function () {
+        const hôtels = data.filter((datas) => datas.categoryId === 3);
+        gallery.innerHTML = "";
+        Gallery(hôtels);
+        console.log(Hôtels);
+      });
+    })
 
+    .catch((error) => {
+      alert(
+        "Une erreur est survenue sur le site ! Veuillez contacter l'administrateur! "
+      );
+      console.log(error);
     });
-       
-    }).catch((error) => {
-        alert("Une erreur est survenue sur le site ! Veuillez contacter l'administrateur! ");
-        console.log(error);
+}
+
+// Charger la liste des categories
+async function Filtres() {
+  await fetch("http://localhost:5678/api/categories")
+    .then((response) => {
+      if (response.ok) return response.json();
+    })
+    // ajouter les boutons filters
+    .then((data) => {
+      console.table(data);
+      const Filters = document.querySelector(".filters");
+      Filters.innerHTML =
+        '<button class="filter" id="0">Tous</button>' +
+        data
+          .map(
+            (data) =>
+              `<button class='filter' id=${data.id}>${data.name}</button>`
+          )
+          .join("");
+    })
+
+    .catch((error) => {
+      alert(
+        "Une erreur est survenue sur le site ! Veuillez contacter l'administrateur! "
+      );
+      console.log(error);
     });
+}
 
+async function init() {
+  await Filtres();
+  await generategallery();
+}
 
+init();
