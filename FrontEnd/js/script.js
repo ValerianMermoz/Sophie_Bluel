@@ -1,5 +1,5 @@
 const gallery = document.querySelector(".gallery");
-
+let allProjects = [];
 //Fonction qui crée la gallerie d'images
 function Gallery(data) {
   for (let i = 0; i < data.length; i++) {
@@ -31,33 +31,9 @@ async function generategallery() {
     })
     .then((data) => {
       console.table(data);
-      Gallery(data);
-      const Tous = document.getElementById("0");
-      Tous.addEventListener("click", function () {
-        gallery.innerHTML = "";
-        Gallery(data);
-      });
-      const Objets = document.getElementById("1");
-      Objets.addEventListener("click", function () {
-        const filter = data.filter((datas) => datas.categoryId === 1);
-        gallery.innerHTML = "";
-        Gallery(filter);
-        console.log(filter);
-      });
-      const Appartements = document.getElementById("2");
-      Appartements.addEventListener("click", function () {
-        const appartements = data.filter((datas) => datas.categoryId === 2);
-        gallery.innerHTML = "";
-        Gallery(appartements);
-        console.log(Appartements);
-      });
-      const Hôtels = document.getElementById("3");
-      Hôtels.addEventListener("click", function () {
-        const hôtels = data.filter((datas) => datas.categoryId === 3);
-        gallery.innerHTML = "";
-        Gallery(hôtels);
-        console.log(Hôtels);
-      });
+      allProjects= data;
+      Gallery(allProjects);
+      
     })
 
     .catch((error) => {
@@ -77,15 +53,38 @@ async function Filtres() {
     // ajouter les boutons filters
     .then((data) => {
       console.table(data);
-      const Filters = document.querySelector(".filters");
-      Filters.innerHTML =
-        '<button class="filter" id="0">Tous</button>' +
-        data
-          .map(
-            (data) =>
-              `<button class='filter' id=${data.id}>${data.name}</button>`
-          )
-          .join("");
+      const filters = document.querySelector(".filters");
+
+      const button = document.createElement("button");
+        button.setAttribute("class","filter");
+        button.setAttribute("id","0");
+        button.textContent = "Tous";
+        button.addEventListener("click", function () {
+          
+          gallery.innerHTML = "";
+          Gallery(allProjects);
+          
+        });
+        filters.appendChild(button);
+
+      data.forEach(element => {
+        
+        const button = document.createElement("button");
+        button.setAttribute("class","filter");
+        button.setAttribute("id",element.id);
+        button.textContent = element.name;
+        button.addEventListener("click", function () {
+          
+          const filteredProjects = allProjects.filter((project) => project.categoryId === element.id);
+          gallery.innerHTML = "";
+          Gallery(filteredProjects);
+          
+        });
+
+        filters.appendChild(button);
+
+      });
+
     })
 
     .catch((error) => {

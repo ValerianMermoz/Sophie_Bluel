@@ -11,7 +11,7 @@
         rel="stylesheet">
     <meta name="description" content="">
     <link rel="stylesheet" href="./assets/css/loginc.css">
-    <script src="./js/login.js"></script>
+   
 </head>
 
 <body>
@@ -30,10 +30,11 @@
         <h2>Log In</h2>
         <form action="#" method="post">
             <label for="email">E-mail</label>
-            <input type="email" name="email" id="email">
+            <input type="email" name="email" class="email">
             <label for="message">Mot de passe</label>
-            <input type="password" name="pass" id="password">
-            <input type="submit" value="Se connecter">
+            <input type="password" name="pass" class="password">
+            <input class ="login" type="submit" value="Se connecter">
+            <p id="errorMsg"></p>
         </form>
         <p><a href="">Mot de passe oublié?</a></p>
     </section>
@@ -44,7 +45,7 @@
             </ul>
         </nav>
     </footer>
-
+    <script src="./js/login.js"></script>
 </body>
 
 </html>
