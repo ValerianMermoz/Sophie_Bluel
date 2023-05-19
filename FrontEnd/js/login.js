@@ -1,4 +1,4 @@
-// Verfier que les champs login et pwd son bien remplis et puis passer vers la fonction login 
+// Verfier que les champs login et pwd son bien remplis et puis passer vers la fonction login
 
 // async function Login(){
 // fetch ('http://localhost:5678/api/users/login', {
@@ -14,33 +14,37 @@
 // })
 //     .then(res => console.log(res))}
 
-
-
 const loginBtn = document.querySelector(".login")
-.addEventListener("click", async function () {
-
+  .addEventListener("submit", async function (e) {
+    e.preventDefault();
     const loginMail = document.querySelector(".email").value;
     const loginPass = document.querySelector(".password").value;
 
     const loginID = {
       email: loginMail,
-      password: loginPass
+      password: loginPass,
     };
 
-    const loginReqID = JSON.stringify(loginID);
+    const loginOk = JSON.stringify(loginID);
 
     const login = await fetch("http://localhost:5678/api/users/login", {
       method: "POST",
+      body: loginOk,
       headers: {
-        "Accept": "application/json",
-        "Content-type": "application/json"},
-        body: loginReqID
-    })
+        Accept: "application/json",
+        "Content-type": "application/json",
+      },
+      
+    });
+    /** Réponse */
+    const jeton = await login.json();
 
-    const token = await login.json();
-
-        if (login.ok !== true) {
-        alert("User not found")
+    if (login.ok) {
+      alert(jeton.token);
+      window.location.href="http://127.0.0.1:5500/FrontEnd/index.html";
+      
     }
-    console.log(token);
-});
+    else {
+      alert("Erreur dans l’identifiant ou le mot de passe");
+    }
+  });
