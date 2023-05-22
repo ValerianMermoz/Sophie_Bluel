@@ -17,7 +17,7 @@
 
 <body>
 	<div class="blackBloc">
-		<button class="buttonEdition"><i class="fa-regular fa-pen-to-square"></i>Mode édition</button>
+		<a href="#modal" class="buttonEdition"><i class="fa-regular fa-pen-to-square"></i>Mode édition</a>
 		<button class="buttonpublish">publier les changements</button>
 	</div>
 	<header>
@@ -27,6 +27,7 @@
 				<li>projets</li>
 				<li>contact</li>
 				<li><a href="./login.html">login</a></li>
+				<li class="logout">logout</li>
 				<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 			</ul>
 		</nav>
@@ -35,7 +36,7 @@
 		<section id="introduction">
 			<figure>
 				<img src="./assets/images/sophie-bluel.png" alt="">
-				<button class="buttonmodif"><i class="fa-regular fa-pen-to-square"></i>modifier</button>
+				<a href="#modal" class="buttonmodif"><i class="fa-regular fa-pen-to-square"></i>modifier</a>
 			</figure>
 			<article>
 				<h2>Designer d'espace</h2>
@@ -51,15 +52,17 @@
 		<section id="portfolio">
 			<div class="titremodif">
 				<h2>Mes Projets</h2>
-				<button class="buttonmodif2"><i class="fa-regular fa-pen-to-square"></i>modifier</button>
+				<a href="#modal" class="buttonmodif2"><i class="fa-regular fa-pen-to-square"></i>modifier</a>
 			</div>
+			<aside id="modal" class="modal-design">
+				<div class="modale">
+				</div>
+			</aside>
 			<div class="filters">
-
 				<!-- <button class="filter">Tous</button>
 			<button class="filter" data-id="1">Objets</button>
 			<button class="filter" data-id="2">Appartements</button>
-			<button class="filter" data-id="3">Hôtels & restaurants</button>
-			 -->
+			<button class="filter" data-id="3">Hôtels & restaurants</button> -->
 			</div>
 			<div class="gallery">
 			</div>

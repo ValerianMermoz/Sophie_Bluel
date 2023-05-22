@@ -95,10 +95,16 @@ async function Filtres() {
     });
 }
 
+/**Fonction pour conserver le token après Login */
 function saveToken() {
   sessionStorage.getItem("token");
   console.log(saveToken);
+  // classlist.remove("hidden"
+  // classlist.add("hidden")
+  // )
 }
+
+
 
 async function init() {
   await Filtres();
