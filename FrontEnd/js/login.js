@@ -1,5 +1,5 @@
 /**Variable pour remplir les champs email et mot de passe */
-const loginBtn = document.querySelector(".login")
+document.querySelector(".login")
   .addEventListener("submit", async function (e) {
     e.preventDefault();
     const loginMail = document.querySelector(".email").value;
@@ -12,7 +12,7 @@ const loginBtn = document.querySelector(".login")
 
     const loginOk = JSON.stringify(loginID);
     /**Appel FETCH de l'API */
-    const login = await fetch("http://localhost:5678/api/users/login", {
+  fetch("http://localhost:5678/api/users/login", {
       method: "POST",
       body: loginOk,
       headers: {
@@ -20,17 +20,25 @@ const loginBtn = document.querySelector(".login")
         "Content-type": "application/json",
       },
       
-    });
-    /** Réponse */
-    const jeton = await login.json();
-
-    if (login.ok) {
-      alert(jeton.token);
-      sessionStorage.setItem('jeton', jeton);
-      window.location.href="http://127.0.0.1:5500/FrontEnd/index.html";
+    }).then((response) =>{
+      console.log(response);
+     if(response.ok) return response.json();
+     else{
+    if(response.status == 401) alert("Vous n'etes pas autorisé!");
+    if(response.status == 404) alert("Veuillez verifier votre login et pwd!");
+  }
+  })
+    .then((data) =>{
+      if(data){
+      localStorage.setItem('userId', data.userId);
+      localStorage.setItem('token', data.token);
+      window.location.href="./index.html";
+    }
       
-    }
-    else {
-      alert("Erreur dans l’identifiant ou le mot de passe");
-    }
+    })
+    .catch((error) =>{
+      console.log(error);
+      
+    })
+    
   });
