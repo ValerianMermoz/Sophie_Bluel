@@ -95,6 +95,11 @@ async function Filtres() {
     });
 }
 
+function saveToken() {
+  sessionStorage.getItem("token");
+  console.log(saveToken);
+}
+
 async function init() {
   await Filtres();
   await generategallery();

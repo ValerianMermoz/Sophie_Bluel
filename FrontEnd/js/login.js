@@ -1,19 +1,4 @@
-// Verfier que les champs login et pwd son bien remplis et puis passer vers la fonction login
-
-// async function Login(){
-// fetch ('http://localhost:5678/api/users/login', {
-//     method: "POST",
-//     headers: {
-//         'Content-type' : 'application/json',
-//         'accept' : 'application/json'
-//     },
-//     body: {
-//         "email": document.getElementById('email').value,
-//         "password": document.getElementById('password').value
-//       }
-// })
-//     .then(res => console.log(res))}
-
+/**Variable pour remplir les champs email et mot de passe */
 const loginBtn = document.querySelector(".login")
   .addEventListener("submit", async function (e) {
     e.preventDefault();
@@ -26,7 +11,7 @@ const loginBtn = document.querySelector(".login")
     };
 
     const loginOk = JSON.stringify(loginID);
-
+    /**Appel FETCH de l'API */
     const login = await fetch("http://localhost:5678/api/users/login", {
       method: "POST",
       body: loginOk,
@@ -41,6 +26,7 @@ const loginBtn = document.querySelector(".login")
 
     if (login.ok) {
       alert(jeton.token);
+      sessionStorage.setItem('jeton', jeton);
       window.location.href="http://127.0.0.1:5500/FrontEnd/index.html";
       
     }
