@@ -1,5 +1,6 @@
 const gallery = document.querySelector(".gallery");
 let allProjects = [];
+
 //Fonction qui crée la gallerie d'images
 function Gallery(data) {
   for (let i = 0; i < data.length; i++) {
@@ -31,9 +32,8 @@ async function generategallery() {
     })
     .then((data) => {
       console.table(data);
-      allProjects= data;
+      allProjects = data;
       Gallery(allProjects);
-      
     })
 
     .catch((error) => {
@@ -56,35 +56,30 @@ async function Filtres() {
       const filters = document.querySelector(".filters");
 
       const button = document.createElement("button");
-        button.setAttribute("class","filter");
-        button.setAttribute("id","0");
-        button.textContent = "Tous";
-        button.addEventListener("click", function () {
-          
-          gallery.innerHTML = "";
-          Gallery(allProjects);
-          
-        });
-        filters.appendChild(button);
+      button.setAttribute("class", "filter");
+      button.setAttribute("id", "0");
+      button.textContent = "Tous";
+      button.addEventListener("click", function () {
+        gallery.innerHTML = "";
+        Gallery(allProjects);
+      });
+      filters.appendChild(button);
 
-      data.forEach(element => {
-        
+      data.forEach((element) => {
         const button = document.createElement("button");
-        button.setAttribute("class","filter");
-        button.setAttribute("id",element.id);
+        button.setAttribute("class", "filter");
+        button.setAttribute("id", element.id);
         button.textContent = element.name;
         button.addEventListener("click", function () {
-          
-          const filteredProjects = allProjects.filter((project) => project.categoryId === element.id);
+          const filteredProjects = allProjects.filter(
+            (project) => project.categoryId === element.id
+          );
           gallery.innerHTML = "";
           Gallery(filteredProjects);
-          
         });
 
         filters.appendChild(button);
-
       });
-
     })
 
     .catch((error) => {
@@ -95,20 +90,40 @@ async function Filtres() {
     });
 }
 
-/**Fonction pour conserver le token après Login */
-function saveToken() {
-  sessionStorage.getItem("token");
-  console.log(saveToken);
-  // classlist.remove("hidden"
-  // classlist.add("hidden")
-  // )
-}
+/**Fonction pour afficher le menu une fois bien loggé */
+saveToken = function () {
+  const blackBloc = document.getElementById("blackBloc");
+  const buttonModif = document.getElementById("buttonmodif");
+  const buttonModif2 = document.getElementById("buttonmodif2");
+  const logout = document.getElementById("logout");
+  const login = document.getElementById("login");
+  const filtresremove = document.getElementById("filtresremove");
 
-
+  if (window.localStorage.getItem("token", data.token)) {
+    blackBloc.style.display = "flex";
+    buttonModif.style.display = "block";
+    buttonModif2.style.display = "block";
+    logout.style.display = "flex";
+    login.style.display = "none";
+    filtresremove.style.display = "none";
+  } else {
+    blackBloc.style.display = "none";
+    buttonModif.style.display = "none";
+    buttonModif2.style.display = "none";
+    logout.style.display = "none";
+    login.style.display = "flex";
+    filtresremove.style.display = "flex";
+  }
+};
+// addEventListener("click", function() {
+//   const logout = document.getElementById("logout");
+//   window.localStorage.removeItem("token", data.token)
+// });
 
 async function init() {
   await Filtres();
   await generategallery();
 }
 
+saveToken();
 init();

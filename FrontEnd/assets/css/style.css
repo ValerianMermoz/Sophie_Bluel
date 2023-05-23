@@ -122,7 +122,6 @@ h2{
 }
 
 .titremodif{
-	display:flex;
 	flex-direction:row;
 	align-items:center;
 	justify-content:center;
@@ -130,12 +129,11 @@ h2{
 }
 
 .buttonmodif{
-	display:block;
 	width:80%;
 	font-size:14px;
 	border:none;
 	background-color:transparent;
-margin:auto;
+	margin:auto;
 	font-weight:100;
 }
 
@@ -148,9 +146,8 @@ margin:auto;
 	font-weight:100;
 }
 
-.logout {
-	visibility:hidden;
-	display:none;
+
+#login {
 }
 
 nav ul {
