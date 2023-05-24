@@ -1,4 +1,5 @@
 const gallery = document.querySelector(".gallery");
+const logout = document.getElementById("logout");
 let allProjects = [];
 
 //Fonction qui crée la gallerie d'images
@@ -99,11 +100,8 @@ saveToken = function () {
   const login = document.getElementById("login");
   const filtresremove = document.getElementById("filtresremove");
 
-  if (window.localStorage.getItem("token", data.token)) {
-    blackBloc.style.display = "flex";
+  if (window.localStorage.getItem("token")) {
     buttonModif.style.display = "block";
-    buttonModif2.style.display = "block";
-    logout.style.display = "flex";
     login.style.display = "none";
     filtresremove.style.display = "none";
   } else {
@@ -115,10 +113,11 @@ saveToken = function () {
     filtresremove.style.display = "flex";
   }
 };
-// addEventListener("click", function() {
-//   const logout = document.getElementById("logout");
-//   window.localStorage.removeItem("token", data.token)
-// });
+
+ logout.addEventListener("click", function() {
+    window.localStorage.removeItem("token");
+    window.location.href="./index.html";
+ });
 
 async function init() {
   await Filtres();
