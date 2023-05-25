@@ -43,7 +43,7 @@ function modaleGallery(data) {
     imageDiv.src = data[i].imageUrl;
 
     const figCaption = document.createElement("figcaption");
-    figCaption.textContent = data[i].title;
+    figCaption.textContent = "éditer";
 
     divOfImg.appendChild(imageDiv);
     divOfImg.appendChild(figCaption);
