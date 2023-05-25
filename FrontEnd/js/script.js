@@ -16,8 +16,6 @@ function Gallery(data) {
     divOfProjects.appendChild(figCaption);
     gallery.appendChild(divOfProjects);
   }
-
-  //Listener filtre uniquement les objets
 }
 
 //Recuperation des projets depuis l'api fourni par le backend
