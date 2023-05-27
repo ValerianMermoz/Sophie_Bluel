@@ -14,15 +14,16 @@
   
   /* Modal Content/Box */
   .modal-content {
-	position:relative;
+	position : relative;
 	background-color: #fefefe;
 	margin: 15% auto; /* 15% from the top and centered */
-	padding: 50px;
+	padding: 40px;
 	border: 1px solid #888;
 	width: 50%; /* Could be more or less, depending on screen size */
   }
 
   .modal-content > p {
+	font-family: 'Syne';
 	display : flex;
 	font-size : 25px;
 	justify-content: center;
@@ -33,7 +34,7 @@
   /* The Close Button */
   .close {
 	color: #aaa;
-	position: absolute;
+	position : absolute;
     right: 20px;
     top: 15px;
 	font-size: 30px;
@@ -49,20 +50,58 @@
 
   /* Modal Footer */
 .modalImg {
+	display: relative;
 	width: 100%;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 	padding-top : 50px;
-
+	gap:10px;
 }
 
 .modalImg img {
-	width: 50%;
-
+	width: 100%;
 }
 
-  /* Add Animation */
-@keyframes animatetop {
-	from {top: -300px; opacity: 0}
-	to {top: 0; opacity: 1}
+.fa-trash-can  {
+	position:absolute;
+	background-color: black;
+	padding : 5px;
+	color: white;
+	
+}
+
+.modalFooter {
+	display : flex;
+	flex-direction : column;
+	align-items : center;
+	border-top : 1px solid #B3B3B3;
+}
+
+.modalFooter > p {
+	font-family: 'Syne';
+	color: #D65353;
+}
+
+.boutonajout {
+	padding : 10px;
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	margin : 2em auto ;
+	width: 180px;
+	text-align: center;
+	border-radius: 60px ;
+	border : none;
+	cursor:pointer;
+}
+
+.modal-content2 {
+	display:none;
+	position : relative;
+	background-color: #fefefe;
+	margin: 15% auto; /* 15% from the top and centered */
+	padding: 40px;
+	border: 1px solid #888;
+	width: 50%; /* Could be more or less, depending on screen size */
   }

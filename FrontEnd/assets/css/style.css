@@ -130,7 +130,8 @@ h2{
 }
 
 .buttonmodif{
-	width:80%;
+	padding-top : 10px;
+
 	font-size:14px;
 	border:none;
 	background-color:transparent;
@@ -177,7 +178,6 @@ a:hover {
 	flex: 1
 }
 #introduction img {
-	display: block;
 	margin: auto;
 	width: 80%;
 }
