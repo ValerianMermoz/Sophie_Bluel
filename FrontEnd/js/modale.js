@@ -3,8 +3,8 @@ const modal = document.getElementById("myModal");
 const galleryModale = document.querySelector(".modalImg");
 const modalFooter = document.querySelector(".modalFooter");
 const modalContent = document.getElementById("modal-content");
-const modalContentDeux = document.querySelector(".modal-content2");
-const flecheRetour = document.querySelector("fa-solid fa-arrow-left")
+const modalContentDeux = document.getElementById("modal-contentdeux");
+const flecheRetour = document.getElementById("flecheRetour")
 
 
 
@@ -40,6 +40,11 @@ window.onclick = function (event) {
     modal.style.display = "none";
   }
 };
+// Quand on clique sur la fleche on revient sur la première modal
+flecheRetour.onclick = function () {
+  modalContent.style.display = "block";
+  modalContentDeux.style.display = "none";
+}
 
 function modaleGallery(data) {
   for (let i = 0; i < data.length; i++) {
@@ -67,7 +72,7 @@ function modaleGallery(data) {
   boutonAjout.textContent = "Ajouter une photo";
   boutonAjout.addEventListener("click", function() {
     modalContent.style.display = "none";
-    modalContentDeux.style.display = "flex";
+    modalContentDeux.style.display = "block";
     });
 
   const supprGalerie = document.createElement("p");
@@ -77,12 +82,7 @@ function modaleGallery(data) {
   modalFooter.appendChild(supprGalerie);
 
 }
-if (flecheRetour){
-flecheRetour.addEventListener("click", function() {
-  modalContent.style.display = "flex";
-  modalContentDeux.style.display = "none";
-  });
-}
+
 
 //Recuperation des projets depuis l'api fourni par le backend
 async function generateModaleGallery() {

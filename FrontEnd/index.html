@@ -81,7 +81,7 @@
         <input type="email" name="email" id="email" />
         <label for="message">Message</label>
         <textarea name="message" id="message" cols="30" rows="10"></textarea>
-        <input type="submit" value="Envoyer"/>
+        <input type="submit" value="Envoyer" />
       </form>
     </section>
   </main>
@@ -104,8 +104,32 @@
       <div class="modalFooter">
       </div>
     </div>
-    <div class="modal-content2">
-      <i class="fa-solid fa-arrow-left"></i>
+    <div class="modal-contentdeux" id="modal-contentdeux">
+      <i class="fa-solid fa-arrow-left" id="flecheRetour"></i>
+      <span class="close">&times;</span>
+      <p>Ajout photo</p>
+      <div class="conteneurchampphoto">
+        <div class="modalajoutphoto">
+          <i class="fa-regular fa-image"></i>
+          <label for="files" class="boutonphoto">+ Ajouter photo</label>
+          <input id="files" type="file">
+          <p>jpg, png : 4mo max</p>
+        </div>
+        <div class="formulaire-ajout">
+          <label for="title" class="title">Titre</label>
+          <input type="text" class="labelModal" id="title" name="title">
+          <label for="catégorie" class="title">Catégorie</label>
+          <select name="categorie" class="labelModal" id="category">
+            <option value=""></option>
+            <option value="objets">Objets</option>
+            <option value="appartements">Appartements</option>
+            <option value="hotels&restaurants">Hôtels & restaurants</option>
+          </select>
+        </div>
+        <div class="modalFooter">
+          <button class="validation">Valider</p>
+        </div>
+      </div>
     </div>
   </div>
   <script src="./js/script.js"></script>
