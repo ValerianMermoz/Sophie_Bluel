@@ -1,4 +1,4 @@
-// Get the modal
+// Variables pour les modales
 const modal = document.getElementById("myModal");
 const galleryModale = document.querySelector(".modalImg");
 const modalFooter = document.querySelector(".modalFooter");
@@ -8,15 +8,15 @@ const flecheRetour = document.getElementById("flecheRetour")
 
 
 
-// Get the button that opens the modal
+// Variables btn pour l'ouverture de la modale
 const btn = document.getElementById("buttonEdition");
 const btnmodif = document.getElementById("buttonmodif");
 const btnmodif2 = document.getElementById("buttonmodif2");
 
-// Get the <span> element that closes the modal
+// Variable span pour la fermeture de modale
 const span = document.getElementsByClassName("close")[0];
 
-// When the user clicks on the button, open the modal
+// Quand on clique sur le bouton, ouvre la modale
 btn.onclick = function () {
   modal.style.display = "block";
 };
@@ -29,12 +29,12 @@ btnmodif2.onclick = function () {
   modal.style.display = "block";
 };
 
-// When the user clicks on <span> (x), close the modal
+// Quand on clique sur le X cela ferme la modale
 span.onclick = function () {
   modal.style.display = "none";
 };
 
-// When the user clicks anywhere outside of the modal, close it
+// Quand on clique nimporte où en dehors de la modale, elle se ferme
 window.onclick = function (event) {
   if (event.target == modal) {
     modal.style.display = "none";
@@ -46,15 +46,20 @@ flecheRetour.onclick = function () {
   modalContentDeux.style.display = "none";
 }
 
+// Fonction d'affichage des projets
 function modaleGallery(data) {
   for (let i = 0; i < data.length; i++) {
     const divOfImg = document.createElement("figure");
+    divOfImg.setAttribute("class", "figModal");
+    divOfImg.setAttribute("id", "figMod"+data[i].id);
     const imageDiv = document.createElement("img");
     imageDiv.src = data[i].imageUrl;
 
     const poubelle = document.createElement("i");
     poubelle.setAttribute("class", "fa-solid fa-trash-can");
-
+    poubelle.addEventListener("click", function(event){
+      console.log(data[i].id)
+    });
     const figCaption = document.createElement("figcaption");
     figCaption.textContent = "éditer";
 
@@ -108,6 +113,20 @@ async function generateModaleGallery() {
       console.log(error);
     });
 }
+
+// // Suppresion d'un ou plusieurs projets
+// poubelle.addEventListener("click", supprimeImage);
+
+// function supprimeImage() {
+
+//   fetch ('http://localhost:5678/api/works/${id}', {
+//     method : 'DELETE',
+//   })
+// }
+
+
+
+
 
 async function initModale() {
   await generateModaleGallery();

@@ -5,7 +5,8 @@ let allProjects = [];
 //Fonction qui crée la gallerie d'images
 function Gallery(data) {
   for (let i = 0; i < data.length; i++) {
-    const divOfProjects = document.createElement("div");
+    const divOfProjects = document.createElement("figure");
+    divOfProjects.setAttribute("id", "fig"+data[i].id);
     const imageDiv = document.createElement("img");
     imageDiv.src = data[i].imageUrl;
 
@@ -121,6 +122,8 @@ async function init() {
   await Filtres();
   await generategallery();
 }
+
+
 
 saveToken();
 init();

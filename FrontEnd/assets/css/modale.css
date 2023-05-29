@@ -49,8 +49,10 @@
   }
 
   /* Modal Footer */
+  .figModal{
+	position: relative;
+  }
 .modalImg {
-	display: relative;
 	width: 100%;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
@@ -64,6 +66,8 @@
 
 .fa-trash-can  {
 	position:absolute;
+	top:0px;
+	right: 0px;
 	background-color: black;
 	padding : 5px;
 	color: white;
