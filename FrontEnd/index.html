@@ -27,7 +27,7 @@
       <ul>
         <li>projets</li>
         <li>contact</li>
-        <li><a href="./login.html" id="login">login</a></li>
+        <li id="login"><a href="./login.html">login</a></li>
         <li class="logout" id="logout">logout</li>
         <li><img src="./assets/icons/instagram.png" alt="Instagram" /></li>
       </ul>
@@ -104,33 +104,36 @@
       <div class="modalFooter">
       </div>
     </div>
-    <div class="modal-contentdeux" id="modal-contentdeux">
+    <form id="formAjout">
       <i class="fa-solid fa-arrow-left" id="flecheRetour"></i>
-      <span class="close">&times;</span>
       <p>Ajout photo</p>
-      <div class="conteneurchampphoto">
-        <div class="modalajoutphoto">
-          <i class="fa-regular fa-image"></i>
-          <label for="files" class="boutonphoto">+ Ajouter photo</label>
-          <input id="files" type="file" accept="jpg, png">
-          <p>jpg, png : 4mo max</p>
+      <div class="contentImg">
+        <div class="image">
+          <img id="imgAjout">
+          <div class="removeImageButton"><i class="fa fa-times"></i></div>
         </div>
-        <div class="formulaire-ajout">
-          <label for="title" class="title">Titre</label>
-          <input type="text" class="labelModal" id="title" name="title">
-          <label for="catégorie" class="title">Catégorie</label>
-          <select name="categorie" class="labelModal" id="category">
-            <option value=""></option>
-            <option value="objets">Objets</option>
-            <option value="appartements">Appartements</option>
-            <option value="hotels&restaurants">Hôtels & restaurants</option>
-          </select>
-        </div>
-        <div class="modalFooter">
-          <button class="validation">Valider</p>
-        </div>
+
+        <i class="fa fa-image"></i>
+        <input type="button" id="buttonloadFile" value="+ Ajouter photo"
+          onclick="document.getElementById('file').click();" />
+        <input type="file" id="file" name="image" accept=".jpg, .jpeg, .png" onchange="previewImage(event);" />
+        <p class="detailsImg">jpg, png : 4mo max</p>
       </div>
-    </div>
+      <div class="titre">
+        <label for="title" class="label">Title</label>
+        <input type="text" class="labelModal" id="title" name="title">
+      </div>
+      <div class="categorie">
+        <label for="category" class="label">Catégorie</label>
+        <select class="labelModal" id="category" name="category">
+          <option value="-1" class="labelCategory">Veuillez choisir une catégorie</option>
+        </select>
+      </div>
+      <hr>
+      <!--le bouton de validation de l'ajout-->
+      <button type="submit" class="btnValider" id="btnValider"> Valider </button>
+      <span id="message"></span>
+    </form>
   </div>
   <script src="./js/script.js"></script>
   <script src="./js/modale.js"></script>

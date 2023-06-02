@@ -3,8 +3,9 @@ const modal = document.getElementById("myModal");
 const galleryModale = document.querySelector(".modalImg");
 const modalFooter = document.querySelector(".modalFooter");
 const modalContent = document.getElementById("modal-content");
-const modalContentDeux = document.getElementById("modal-contentdeux");
+const modalContentDeux = document.getElementById("formAjout");
 const flecheRetour = document.getElementById("flecheRetour")
+const submit = document.getElementById("btnValider");
 
 
 
@@ -55,11 +56,10 @@ function modaleGallery(data) {
     const imageDiv = document.createElement("img");
     imageDiv.src = data[i].imageUrl;
 
+    /**Suppresion d'une image du projet */
     const poubelle = document.createElement("i");
     poubelle.setAttribute("class", "fa-solid fa-trash-can");
-    poubelle.addEventListener("click", function(event){
-      console.log(data[i].id)
-    });
+    ;
     const figCaption = document.createElement("figcaption");
     figCaption.textContent = "éditer";
 
@@ -70,6 +70,7 @@ function modaleGallery(data) {
     divOfImg.appendChild(poubelle);
     galleryModale.appendChild(divOfImg);
   }
+  
 
   const boutonAjout = document.createElement("button");
   boutonAjout.setAttribute("class", "boutonajout");
@@ -85,9 +86,9 @@ function modaleGallery(data) {
 
   modalFooter.appendChild(boutonAjout);
   modalFooter.appendChild(supprGalerie);
-
+  
 }
-
+//* Suppresion d'un projet *//
 
 //Recuperation des projets depuis l'api fourni par le backend
 async function generateModaleGallery() {
@@ -114,15 +115,100 @@ async function generateModaleGallery() {
     });
 }
 
-// // Suppresion d'un ou plusieurs projets
-// poubelle.addEventListener("click", supprimeImage);
 
-// function supprimeImage() {
 
-//   fetch ('http://localhost:5678/api/works/${id}', {
-//     method : 'DELETE',
-//   })
-// }
+/* Ajout d'image*/
+function previewImage(e){
+  const imagePreview = document.getElementById("imgAjout");
+  const removeImageButton = document.querySelector(".removeImageButton");
+  const file = e.target.files[0]; // Vérifie si un fichier a été sélectionné
+  if (file) {
+      if (file.type.match("image.*")) {
+          if (file.size <= 4194304) // verifier la taille de l'image
+          {
+              var reader = new FileReader();
+              reader.onload = function (event) {
+                  imagePreview.src = event.target.result;
+                  imagePreview.style.display = "block";
+                  document.querySelector(".fa-image").style.display = "none";
+                  document.getElementById("buttonloadFile").style.display = "none";
+                  document.getElementById("file").style.display = "none";
+                  document.querySelector(".detailsImg").style.display = "none";
+                  removeImageButton.style.display = "block";
+              };
+              reader.readAsDataURL(file);
+          } else {
+              alert("Le fichier dépasse la taille maximale autorisée de 4 Mo.");
+              
+      imagePreview.style.display = "none";
+      document.querySelector(".fa-image").style.display = "block";
+      document.getElementById("buttonloadFile").style.display = "block";
+      document.getElementById("file").style.display = "block";
+      document.querySelector(".detailsImg").style.display = "block";
+      removeImageButton.style.display = "none";
+          }
+      } else {
+          alert("Le fichier sélectionné n'est pas une image.");
+          imagePreview.style.display = "none";
+          document.querySelector(".fa-image").style.display = "block";
+          document.getElementById("buttonloadFile").style.display = "block";
+          document.getElementById("file").style.display = "block";
+          document.querySelector(".detailsImg").style.display = "block";
+          removeImageButton.style.display = "none";
+      }
+  } else {
+      
+    imagePreview.style.display = "none";
+    document.querySelector(".fa-image").style.display = "block";
+    document.getElementById("buttonloadFile").style.display = "block";
+    document.getElementById("file").style.display = "block";
+    document.querySelector(".detailsImg").style.display = "block";
+    removeImageButton.style.display = "none";
+  }
+  removeImageButton.addEventListener("click", (e) => {
+      e.preventDefault();
+      imagePreview.style.display = "none";
+      document.querySelector(".fa-image").style.display = "block";
+      document.getElementById("buttonloadFile").style.display = "block";
+      document.getElementById("file").style.display = "block";
+      document.querySelector(".detailsImg").style.display = "block";
+      removeImageButton.style.display = "none";
+  });
+}
+
+
+
+//* Ajout d'un nouveau projet *//
+function modaleAddNewWork() {
+  const image = document.getElementById('file');
+  const titre = document.getElementById('title');
+  const category = document.getElementById('category');
+  submit.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const token = localStorage.getItem(`token`);
+      const formData = new FormData();
+      formData.append('title', titre.value);
+      formData.append('category', category.value);
+      formData.append('image', image.files[0]);    
+      let request = {
+          method: "POST",
+          headers: {
+              Authorization: `Bearer ${token}`
+          },
+          body: formData
+      };
+      fetch("http://localhost:5678/api/works", request)
+          .then(response => {
+              if (response.ok) {
+                  console.log("gg");
+              } else {
+                  console.log("raté");
+              };
+          });
+  });
+};
+
 
 
 
@@ -130,6 +216,8 @@ async function generateModaleGallery() {
 
 async function initModale() {
   await generateModaleGallery();
+  
 }
 
+modaleAddNewWork();
 initModale();

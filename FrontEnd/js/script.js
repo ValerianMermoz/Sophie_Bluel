@@ -123,6 +123,11 @@ async function init() {
   await generategallery();
 }
 
+//* Suppression d'un ou plusieurs projets *//
+// function deleteWork () {
+
+// }
+
 
 
 saveToken();

@@ -100,7 +100,7 @@
 	cursor:pointer;
 }
 
-.modal-contentdeux {
+#formAjout {
 	display:none;
 	position : relative;
 	background-color: #fefefe;
@@ -111,7 +111,7 @@
 	
   }
 
-.modal-contentdeux > p {
+#formAjout > p {
 	font-family: 'Work Sans';
     display: flex;
     font-size: 25px;
@@ -127,32 +127,32 @@
 	cursor: pointer;
 }
 
-.conteneurchampphoto {
+.contentImg {
 	display : flex;
 	flex-direction:column;
 	justify-content :center;
-	padding : 0 200px 0 200px;
-}	
-
-.modalajoutphoto {
-	width : 100%;
-	display : flex;
-	flex-direction:column;
 	align-items:center;
-	justify-content : center;
 	background-color : #E8F1F7;
 	border-radius : 3px;
 	margin-top : 40px;
-	height : 200px;
-	gap : 0px;
-}
+	padding-bottom : 20px;
+	gap : 15px;
+}	
 
 .fa-image {
-	font-size : 50px;
+	font-size : 70px;
 	color : #B9C5CC;
 }
 
-.boutonphoto {
+.fa-times {
+	font-size : 20px;
+	position : absolute;
+	top : 20px;
+	right : 20px;
+	cursor : pointer;
+}
+
+#buttonloadFile {
 	padding : 10px;
 	font-family: 'Work Sans';
 	font-weight: 700;
@@ -165,11 +165,11 @@
 	cursor:pointer;
 }
 
-#files {
-	visibility : hidden;
+#file {
+	display : none;
 }
 
-.formulaire-ajout {
+.titre {
 	display : flex;
 	flex-direction:column;
 	gap :20px;
@@ -177,7 +177,15 @@
 	margin-bottom : 40px;
 }
 
-.title {
+.categorie {
+	display : flex;
+	flex-direction:column;
+	gap :20px;
+	margin-top : 20px;
+	margin-bottom : 40px;
+}
+
+.label {
 	font-family: 'Work Sans';
 }
 
@@ -187,7 +195,8 @@
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-.validation {
+.btnValider {
+	display : flow-root;
 	padding : 10px;
 	font-family: 'Syne';
 	font-weight: 700;
