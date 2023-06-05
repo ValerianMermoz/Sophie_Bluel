@@ -59,7 +59,8 @@ function modaleGallery(data) {
     /**Suppresion d'une image du projet */
     const poubelle = document.createElement("i");
     poubelle.setAttribute("class", "fa-solid fa-trash-can");
-    ;
+    poubelle.setAttribute("id", "trash");
+    
     const figCaption = document.createElement("figcaption");
     figCaption.textContent = "éditer";
 
@@ -70,6 +71,23 @@ function modaleGallery(data) {
     divOfImg.appendChild(poubelle);
     galleryModale.appendChild(divOfImg);
   }
+  const deletePicture = document.querySelector("#trash");
+  const modalPicture = galleryModale.querySelectorAll('img');
+  modalPicture.forEach(picture => {
+      picture.addEventListener('click', () => {
+          const imageId = picture.dataset.id;
+          picture.classList.toggle('selected');
+      });
+  });
+  deletePicture.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const selectedPicture = galleryModale.querySelector(".selected")
+      if (selectedPicture) {
+          const imageId = selectedPicture.dataset.id
+          deleteImage(imageId)
+      }
+  })
   
 
   const boutonAjout = document.createElement("button");
@@ -89,6 +107,29 @@ function modaleGallery(data) {
   
 }
 //* Suppresion d'un projet *//
+function deleteImage(imageId) {
+  const token = localStorage.getItem(`token`);
+  fetch(`http://localhost:5678/api/works/${imageId}`, {
+      method: `DELETE`,
+      headers: {
+          Authorization: `Bearer ${token}`
+      }
+  })
+      .then(response => {
+          if (response.ok) {
+              return response.json();
+          } else {
+              throw new Error('error deleting picture');
+          }
+      })
+      .then(data => {
+          console.log(data)
+      })
+      .catch(error => {
+          console.log("Error delete picture:", error);
+      })
+  init();
+}
 
 //Recuperation des projets depuis l'api fourni par le backend
 async function generateModaleGallery() {
