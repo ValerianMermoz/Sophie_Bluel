@@ -19,17 +19,22 @@ const span = document.getElementsByClassName("close")[0];
 
 // Quand on clique sur le bouton, ouvre la modale
 btn.onclick = function () {
-  modal.style.display = "block";
+  openModale();
 };
 
 btnmodif.onclick = function () {
-  modal.style.display = "block";
+  openModale();
 };
 
 btnmodif2.onclick = function () {
-  modal.style.display = "block";
+ openModale();
 };
 
+function openModale(){
+  
+  modal.style.display = "block";
+  modaleGallery(allProjects);
+}
 // Quand on clique sur le X cela ferme la modale
 span.onclick = function () {
   modal.style.display = "none";
@@ -47,48 +52,47 @@ flecheRetour.onclick = function () {
   modalContentDeux.style.display = "none";
 }
 
+function createFigureModale(projet){
+  const divOfImg = document.createElement("figure");
+  divOfImg.setAttribute("class", "figModal");
+  divOfImg.setAttribute("id", "figMod"+projet.id);
+  const imageDiv = document.createElement("img");
+  imageDiv.src = projet.imageUrl;
+
+  /**Suppresion d'une image du projet */
+  const poubelle = document.createElement("i");
+  poubelle.setAttribute("class", "fa-solid fa-trash-can");
+  poubelle.setAttribute("id", "trash");
+  
+  poubelle.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    const confirmation = confirm("Etes vous sûr de vouloir supprimer ce projet !");
+    if(confirmation){
+      const projetId = projet.id;
+      // supprimer le projet depuis l'api
+      deleteImage(projetId);
+    }
+    
+  });
+  const figCaption = document.createElement("figcaption");
+  figCaption.textContent = "éditer";
+
+
+
+  divOfImg.appendChild(imageDiv);
+  divOfImg.appendChild(figCaption);
+  divOfImg.appendChild(poubelle);
+ 
+  return divOfImg;
+}
 // Fonction d'affichage des projets
 function modaleGallery(data) {
   for (let i = 0; i < data.length; i++) {
-    const divOfImg = document.createElement("figure");
-    divOfImg.setAttribute("class", "figModal");
-    divOfImg.setAttribute("id", "figMod"+data[i].id);
-    const imageDiv = document.createElement("img");
-    imageDiv.src = data[i].imageUrl;
-
-    /**Suppresion d'une image du projet */
-    const poubelle = document.createElement("i");
-    poubelle.setAttribute("class", "fa-solid fa-trash-can");
-    poubelle.setAttribute("id", "trash");
-    
-    const figCaption = document.createElement("figcaption");
-    figCaption.textContent = "éditer";
-
-
-
-    divOfImg.appendChild(imageDiv);
-    divOfImg.appendChild(figCaption);
-    divOfImg.appendChild(poubelle);
+    const divOfImg = createFigureModale(data[i]);
     galleryModale.appendChild(divOfImg);
   }
-  const deletePicture = document.querySelector("#trash");
-  const modalPicture = galleryModale.querySelectorAll('img');
-  modalPicture.forEach(picture => {
-      picture.addEventListener('click', () => {
-          const imageId = picture.dataset.id;
-          picture.classList.toggle('selected');
-      });
-  });
-  deletePicture.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      const selectedPicture = galleryModale.querySelector(".selected")
-      if (selectedPicture) {
-          const imageId = selectedPicture.dataset.id
-          deleteImage(imageId)
-      }
-  })
-  
+ 
 
   const boutonAjout = document.createElement("button");
   boutonAjout.setAttribute("class", "boutonajout");
@@ -116,44 +120,26 @@ function deleteImage(imageId) {
       }
   })
       .then(response => {
-          if (response.ok) {
-              return response.json();
-          } else {
-              throw new Error('error deleting picture');
-          }
-      })
-      .then(data => {
-          console.log(data)
+        console.log(response);
+        if(response.status==204) // element a ete bien supprimer depuis la bd
+        {
+          //Actualiser le tableau global de mes projets
+          allProjects = allProjects.filter(projet => projet.id != imageId );
+          //Supprimer depuis la page index le projet avec id = imageId
+          document.getElementById("figMod"+imageId).remove();
+          //Supprimer depuis la modale la figure du projet avec id= imageId 
+          document.getElementById("fig"+imageId).remove();
+        }
+        if(response.status== 401)
+        {
+             alert('Vous n\'etes pas autorisé de supprimer le projet !');
+        }
+        
       })
       .catch(error => {
-          console.log("Error delete picture:", error);
-      })
-  init();
-}
-
-//Recuperation des projets depuis l'api fourni par le backend
-async function generateModaleGallery() {
-  await fetch("http://localhost:5678/api/works", {
-    method: "GET",
-    headers: {
-      accept: "application/json",
-    },
-  })
-    .then((response) => {
-      if (response.ok) return response.json();
-    })
-    .then((data) => {
-      console.table(data);
-      allProjects = data;
-      modaleGallery(allProjects);
-    })
-
-    .catch((error) => {
-      alert(
-        "Une erreur est survenue sur le site ! Veuillez contacter l'administrateur! "
-      );
-      console.log(error);
-    });
+          alert("Une erreur est survenu lors de la suppression !");
+          console.log(error);
+      });
 }
 
 
@@ -167,9 +153,11 @@ function previewImage(e){
       if (file.type.match("image.*")) {
           if (file.size <= 4194304) // verifier la taille de l'image
           {
-              var reader = new FileReader();
+              const reader = new FileReader();
               reader.onload = function (event) {
                   imagePreview.src = event.target.result;
+                  imagePreview.style.width = "100%";
+                  imagePreview.style.objectFit = "cover";
                   imagePreview.style.display = "block";
                   document.querySelector(".fa-image").style.display = "none";
                   document.getElementById("buttonloadFile").style.display = "none";
@@ -241,10 +229,12 @@ function modaleAddNewWork() {
       };
       fetch("http://localhost:5678/api/works", request)
           .then(response => {
-              if (response.ok) {
-                  console.log("gg");
+              if (response.status==201) {
+                  const divOfImg = createFigureModale(projetId);
+                  galleryModale.appendChild(projetId);
               } else {
-                  console.log("raté");
+                (response.status==400);
+
               };
           });
   });
@@ -254,11 +244,5 @@ function modaleAddNewWork() {
 
 
 
-
-async function initModale() {
-  await generateModaleGallery();
-  
-}
-
 modaleAddNewWork();
-initModale();
+

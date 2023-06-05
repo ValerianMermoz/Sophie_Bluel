@@ -52,7 +52,7 @@ async function Filtres() {
     })
     // ajouter les boutons filters
     .then((data) => {
-      console.table(data);
+      //console.table(data);
       const filters = document.querySelector(".filters");
 
       const button = document.createElement("button");
@@ -80,6 +80,8 @@ async function Filtres() {
 
         filters.appendChild(button);
       });
+
+      fillSelectCategories(data);
     })
 
     .catch((error) => {
@@ -90,6 +92,16 @@ async function Filtres() {
     });
 }
 
+function fillSelectCategories(listCategories){
+  let select = document.getElementById('category');
+  listCategories.forEach(element => {
+    const option = document.createElement('option');
+    option.value = element.id;
+    option.textContent = element.name;
+    select.appendChild(option);
+  });
+
+}
 /**Fonction pour afficher le menu une fois bien loggé */
 saveToken = function () {
   const blackBloc = document.getElementById("blackBloc");
