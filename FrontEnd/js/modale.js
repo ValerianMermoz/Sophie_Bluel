@@ -199,7 +199,7 @@ function modaleAddNewWork() {
   const image = document.getElementById("file");
   const titre = document.getElementById("title");
   const category = document.getElementById("category");
-  submit.addEventListener("submit", (event) => {
+  modalContentDeux.addEventListener("submit", (event) => {
     event.preventDefault();
 
     const token = localStorage.getItem(`token`);
@@ -215,13 +215,21 @@ function modaleAddNewWork() {
         Accept: "application/json",
         Authorization: `Bearer ${token}`,
       },
-    }).then((response) => {
-      if (response.status == 201) {
-        response.json()
-        .then
-        const divOfImg = createFigureModale(allProjects);
-        galleryModale.appendChild(divOfImg);
-      } else {
+    })
+    .then((response) => {
+      if (response.status == 201) return response.json()
+      .then {
+      const lastPicture = "http://localhost:5678/api/images/" + image.files[0].name
+      const divOfImg = createFigureModale(lastPicture);
+      const divOfProjects = createFigureModale(lastPicture);
+      const imageDiv = document.createElement("img");
+      const figCaption = document.createElement("figcaption");
+      galleryModale.appendChild(divOfImg);
+      divOfProjects.appendChild(imageDiv);
+    divOfProjects.appendChild(figCaption);
+    gallery.appendChild(divOfProjects);)) }
+        
+        else {
         if (response.status == 400) alert("Mauvaise requête!");
         if (response.status == 401) alert("Vous n'êtes pas autorisé!");
         if (response.status == 500) alert("Erreur inattendu!");
