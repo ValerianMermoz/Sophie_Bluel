@@ -110,11 +110,13 @@ saveToken = function () {
   const logout = document.getElementById("logout");
   const login = document.getElementById("login");
   const filtresremove = document.getElementById("filtresremove");
+  const titremodif = document.getElementById("titreModif");
 
   if (window.localStorage.getItem("token")) {
     buttonModif.style.display = "block";
     login.style.display = "none";
     filtresremove.style.display = "none";
+    titremodif.style.paddingBottom = "30px";
   } else {
     blackBloc.style.display = "none";
     buttonModif.style.display = "none";
@@ -134,13 +136,6 @@ async function init() {
   await Filtres();
   await generategallery();
 }
-
-//* Suppression d'un ou plusieurs projets *//
-// function deleteWork () {
-
-// }
-
-
 
 saveToken();
 init();

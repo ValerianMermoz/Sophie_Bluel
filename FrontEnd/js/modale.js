@@ -69,7 +69,7 @@ function createFigureModale(projet) {
     );
     if (confirmation) {
       const projetId = projet.id;
-      // supprimer le projet depuis l'api
+      // Supprime le projet depuis l'API
       deleteImage(projetId);
     }
   });
@@ -116,7 +116,7 @@ function deleteImage(imageId) {
     .then((response) => {
       console.log(response);
       if (response.status == 204) {
-        // element a ete bien supprimer depuis la bd
+        // L'élement à bien été supprimé de la base de donnnées
         //Actualiser le tableau global de mes projets
         allProjects = allProjects.filter((projet) => projet.id != imageId);
         //Supprimer depuis la page index le projet avec id = imageId
@@ -142,7 +142,7 @@ function previewImage(e) {
   if (file) {
     if (file.type.match("image.*")) {
       if (file.size <= 4194304) {
-        // verifier la taille de l'image
+        // Verifier la taille de l'image
         const reader = new FileReader();
         reader.onload = function (event) {
           imagePreview.src = event.target.result;
@@ -195,19 +195,18 @@ function previewImage(e) {
 }
 
 //* Ajout d'un nouveau projet *//
-function modaleAddNewWork() {
+function modaleAddNewWork(e) {
+  const submit = document.getElementById("btnValider")
   const image = document.getElementById("file");
   const titre = document.getElementById("title");
   const category = document.getElementById("category");
   modalContentDeux.addEventListener("submit", (event) => {
     event.preventDefault();
-
     const token = localStorage.getItem(`token`);
     const formData = new FormData();
     formData.append("title", titre.value);
     formData.append("category", category.value);
     formData.append("image", image.files[0]);
-
     fetch("http://localhost:5678/api/works", {
       method: "POST",
       body: formData,
@@ -216,25 +215,24 @@ function modaleAddNewWork() {
         Authorization: `Bearer ${token}`,
       },
     })
-    .then((response) => {
-      if (response.status == 201) return response.json()
-      .then {
-      const lastPicture = "http://localhost:5678/api/images/" + image.files[0].name
-      const divOfImg = createFigureModale(lastPicture);
-      const divOfProjects = createFigureModale(lastPicture);
-      const imageDiv = document.createElement("img");
-      const figCaption = document.createElement("figcaption");
-      galleryModale.appendChild(divOfImg);
-      divOfProjects.appendChild(imageDiv);
-    divOfProjects.appendChild(figCaption);
-    gallery.appendChild(divOfProjects);)) }
-        
-        else {
-        if (response.status == 400) alert("Mauvaise requête!");
+      .then((response) => {
+        if (response.status == 201) return response.json();
+        if (response.status == 400) alert("Veuillez insérer un nom et une catégorie à votre projet");
+        buttonSubmit.style.background = "";
         if (response.status == 401) alert("Vous n'êtes pas autorisé!");
-        if (response.status == 500) alert("Erreur inattendu!");
-      }
-    });
+        submit.disabled = true;
+        buttonSubmit.style.background = "";
+          
+        if (response.status == 500) alert("Veuillez insérer une image à votre projet");
+        submit.disabled = true;
+        buttonSubmit.style.background = "";
+        
+      })
+      .then((newObj) => {
+        const newProjet = createFigureModale(newObj);
+        gallery.appendChild(newProjet);
+      })
+      .catch((error) => {});
   });
 }
 
