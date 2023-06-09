@@ -33,6 +33,8 @@ async function generategallery() {
     .then((data) => {
       console.table(data);
       allProjects = data;
+      console.log(allProjects);
+
       Gallery(allProjects);
     })
 

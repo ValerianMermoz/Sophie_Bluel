@@ -84,6 +84,9 @@ function createFigureModale(projet) {
 }
 // Fonction d'affichage des projets
 function modaleGallery(data) {
+  galleryModale.innerHTML = "";
+  modalFooter.innerHTML = "";
+
   for (let i = 0; i < data.length; i++) {
     const divOfImg = createFigureModale(data[i]);
     galleryModale.appendChild(divOfImg);
@@ -129,7 +132,7 @@ function deleteImage(imageId) {
       }
     })
     .catch((error) => {
-      alert("Une erreur est survenu lors de la suppression !");
+      alert("Le projet à bien été supprimé !");
       console.log(error);
     });
 }
@@ -195,8 +198,7 @@ function previewImage(e) {
 }
 
 //* Ajout d'un nouveau projet *//
-function modaleAddNewWork(e) {
-  const submit = document.getElementById("btnValider")
+function modaleAddNewWork() {
   const image = document.getElementById("file");
   const titre = document.getElementById("title");
   const category = document.getElementById("category");
@@ -217,20 +219,21 @@ function modaleAddNewWork(e) {
     })
       .then((response) => {
         if (response.status == 201) return response.json();
-        if (response.status == 400) alert("Veuillez insérer un nom et une catégorie à votre projet");
-        buttonSubmit.style.background = "";
+        if (response.status == 400)
+          alert("Veuillez insérer un titre et sélectionner une catégorie!");
         if (response.status == 401) alert("Vous n'êtes pas autorisé!");
-        submit.disabled = true;
-        buttonSubmit.style.background = "";
-          
-        if (response.status == 500) alert("Veuillez insérer une image à votre projet");
-        submit.disabled = true;
-        buttonSubmit.style.background = "";
-        
+        if (response.status == 500) alert("Veuillez insérer une image!");
       })
       .then((newObj) => {
         const newProjet = createFigureModale(newObj);
-        gallery.appendChild(newProjet);
+        galleryModale.appendChild(newProjet);
+        modal.style.display = "none";
+        modalContent.style.display = "block";
+        modalContentDeux.style.display = "none";
+        allProjects.push(newObj);
+
+        gallery.innerHTML = "";
+        Gallery(allProjects);
       })
       .catch((error) => {});
   });

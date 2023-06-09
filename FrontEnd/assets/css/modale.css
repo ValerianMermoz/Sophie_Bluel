@@ -17,9 +17,11 @@
 	position : relative;
 	background-color: #fefefe;
 	margin: 15% auto; /* 15% from the top and centered */
-	padding: 40px 150px 40px 150px;
 	border: 1px solid #888;
-	width: 50%; /* Could be more or less, depending on screen size */
+	padding : 40px;
+	width: 50%; /*  /* Could be more or less, depending on screen size */
+	align-items:center;
+	justify-content:center;
   }
 
   .modal-content > p {
@@ -105,9 +107,11 @@
 	position : relative;
 	background-color: #fefefe;
 	margin: 15% auto; /* 15% from the top and centered */
-	padding: 40px;
+	padding: 60px 120px 60px 120px;
+	align-items:center;
+	justify-content:center;
 	border: 1px solid #888;
-	width: 50%; /* Could be more or less, depending on screen size */
+	width: 25%; /* Could be more or less, depending on screen size */
 	
   }
 
