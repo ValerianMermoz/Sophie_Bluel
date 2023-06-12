@@ -126,7 +126,7 @@ h2{
 	flex-direction:row;
 	align-items:center;
 	justify-content:center;
-	gap: 10px;
+	gap: 20px;
 }
 
 .buttonmodif{
@@ -166,6 +166,7 @@ li:hover {
 
 a {
 	text-decoration : none;
+	color:black;
 }
 a:hover {
 	color: #B1663C;
