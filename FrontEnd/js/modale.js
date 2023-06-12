@@ -98,8 +98,8 @@ function modaleGallery(data) {
   boutonAjout.textContent = "Ajouter une photo";
   boutonAjout.addEventListener("click", function () {
     modalContent.style.display = "none";
-    modalContentDeux.style.display = "flex";
-  });
+    modalContentDeux.style.display = "block";
+    });
 
   const supprGalerie = document.createElement("p");
   supprGalerie.textContent = "Supprimer la galerie";
@@ -143,38 +143,41 @@ function previewImage(e) {
   const removeImageButton = document.querySelector(".removeImageButton");
   const file = e.target.files[0]; // Vérifie si un fichier a été sélectionné
   if (file) {
-    if (file.type.match("image.*")) {
-      if (file.size <= 4194304) {
-        // Verifier la taille de l'image
-        const reader = new FileReader();
-        reader.onload = function (event) {
-          imagePreview.src = event.target.result;
-          document.querySelector(".fa-image").style.display = "none";
-          document.getElementById("buttonloadFile").style.display = "none";
-          document.getElementById("file").style.display = "none";
-          document.querySelector(".detailsImg").style.display = "none";
-          removeImageButton.style.display = "block";
-        };
-        reader.readAsDataURL(file);
-      } else {
-        alert("Le fichier dépasse la taille maximale autorisée de 4 Mo.");
-
-        imagePreview.style.display = "none";
-        document.querySelector(".fa-image").style.display = "block";
-        document.getElementById("buttonloadFile").style.display = "block";
-        document.getElementById("file").style.display = "none";
-        document.querySelector(".detailsImg").style.display = "block";
-        removeImageButton.style.display = "block";
-      }
-    } else {
-      alert("Le fichier sélectionné n'est pas une image.");
+      if (file.type.match("image.*")) {
+          if (file.size <= 4194304) // verifier la taille de l'image
+          {
+              const reader = new FileReader();
+              reader.onload = function (event) {
+                  imagePreview.src = event.target.result;
+                  imagePreview.style.width = "100%";
+                  imagePreview.style.objectFit = "cover";
+                  imagePreview.style.display = "block";
+                  document.querySelector(".fa-image").style.display = "none";
+                  document.getElementById("buttonloadFile").style.display = "none";
+                  document.getElementById("file").style.display = "none";
+                  document.querySelector(".detailsImg").style.display = "none";
+                  removeImageButton.style.display = "block";
+              };
+              reader.readAsDataURL(file);
+          } else {
+              alert("Le fichier dépasse la taille maximale autorisée de 4 Mo.");
+              
       imagePreview.style.display = "none";
       document.querySelector(".fa-image").style.display = "block";
       document.getElementById("buttonloadFile").style.display = "block";
-      document.getElementById("file").style.display = "none";
+      document.getElementById("file").style.display = "block";
       document.querySelector(".detailsImg").style.display = "block";
-      removeImageButton.style.display = "block";
-    }
+      removeImageButton.style.display = "none";
+          }
+      } else {
+          alert("Le fichier sélectionné n'est pas une image.");
+          imagePreview.style.display = "none";
+          document.querySelector(".fa-image").style.display = "block";
+          document.getElementById("buttonloadFile").style.display = "block";
+          document.getElementById("file").style.display = "block";
+          document.querySelector(".detailsImg").style.display = "block";
+          removeImageButton.style.display = "none";
+      }
   } else {
     imagePreview.style.display = "none";
     document.querySelector(".fa-image").style.display = "block";
@@ -184,13 +187,13 @@ function previewImage(e) {
     removeImageButton.style.display = "block";
   }
   removeImageButton.addEventListener("click", (e) => {
-    e.preventDefault();
-    imagePreview.style.display = "none";
-    document.querySelector(".fa-image").style.display = "block";
-    document.getElementById("buttonloadFile").style.display = "block";
-    document.getElementById("file").style.display = "none";
-    document.querySelector(".detailsImg").style.display = "block";
-    removeImageButton.style.display = "block";
+      e.preventDefault();
+      imagePreview.style.display = "none";
+      document.querySelector(".fa-image").style.display = "block";
+      document.getElementById("buttonloadFile").style.display = "block";
+      document.getElementById("file").style.display = "block";
+      document.querySelector(".detailsImg").style.display = "block";
+      removeImageButton.style.display = "none";
   });
 }
 

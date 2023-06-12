@@ -10,23 +10,18 @@
 	overflow: auto;
 	background-color: rgb(0,0,0); /* Fallback color */
 	background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-	
+	overflow-y: scroll;
   }
   
   /* Modal Content/Box */
   .modal-content {
 	position : relative;
 	background-color: #fefefe;
-	margin: 5% auto; 
+	margin: 15% auto; /* 15% from the top and centered */
+	padding: 40px;
 	border: 1px solid #888;
-	padding : 40px;
-	width: 630px;
-	height: 730px; /*  /* Could be more or less, depending on screen size */
-	display : flex ;
-	flex-direction: column;
-	gap: 50px;
-	align-items:center;
-	
+	width: 50%; /* Could be more or less, depending on screen size */
+	overflow-y: scroll;
   }
 
   .modal-content > p {
@@ -112,15 +107,10 @@
 	display:none;
 	position : relative;
 	background-color: #fefefe;
-	margin: 5% auto; /* 15% from the top and centered */
-	padding:  40px;
-	flex-direction: column;
-	align-items:center;
-	justify-content:center;
-	gap: 30px;
+	margin: 15% auto; /* 15% from the top and centered */
+	padding: 40px;
 	border: 1px solid #888;
-	width: 630px;
-	height: 730px; /* Could be more or less, depending on screen size */
+	width: 50%; /* Could be more or less, depending on screen size */
 	
   }
 
