@@ -165,35 +165,35 @@ function previewImage(e) {
         imagePreview.style.display = "none";
         document.querySelector(".fa-image").style.display = "block";
         document.getElementById("buttonloadFile").style.display = "block";
-        document.getElementById("file").style.display = "block";
+        document.getElementById("file").style.display = "none";
         document.querySelector(".detailsImg").style.display = "block";
-        removeImageButton.style.display = "none";
+        removeImageButton.style.display = "block";
       }
     } else {
       alert("Le fichier sélectionné n'est pas une image.");
       imagePreview.style.display = "none";
       document.querySelector(".fa-image").style.display = "block";
       document.getElementById("buttonloadFile").style.display = "block";
-      document.getElementById("file").style.display = "block";
+      document.getElementById("file").style.display = "none";
       document.querySelector(".detailsImg").style.display = "block";
-      removeImageButton.style.display = "none";
+      removeImageButton.style.display = "block";
     }
   } else {
     imagePreview.style.display = "none";
     document.querySelector(".fa-image").style.display = "block";
     document.getElementById("buttonloadFile").style.display = "block";
-    document.getElementById("file").style.display = "block";
+    document.getElementById("file").style.display = "none";
     document.querySelector(".detailsImg").style.display = "block";
-    removeImageButton.style.display = "none";
+    removeImageButton.style.display = "block";
   }
   removeImageButton.addEventListener("click", (e) => {
     e.preventDefault();
     imagePreview.style.display = "none";
     document.querySelector(".fa-image").style.display = "block";
     document.getElementById("buttonloadFile").style.display = "block";
-    document.getElementById("file").style.display = "block";
+    document.getElementById("file").style.display = "none";
     document.querySelector(".detailsImg").style.display = "block";
-    removeImageButton.style.display = "none";
+    removeImageButton.style.display = "block";
   });
 }
 
