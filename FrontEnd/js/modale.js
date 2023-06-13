@@ -29,7 +29,7 @@ btnmodif2.onclick = function () {
 };
 
 function openModale() {
-  modal.style.display = "block";
+  modal.style.display = "flex";
   modaleGallery(allProjects);
 }
 // Quand on clique sur le X cela ferme la modale
@@ -45,7 +45,7 @@ window.onclick = function (event) {
 };
 // Quand on clique sur la fleche on revient sur la première modal
 flecheRetour.onclick = function () {
-  modalContent.style.display = "block";
+  modalContent.style.display = "flex";
   modalContentDeux.style.display = "none";
 };
 
@@ -98,7 +98,7 @@ function modaleGallery(data) {
   boutonAjout.textContent = "Ajouter une photo";
   boutonAjout.addEventListener("click", function () {
     modalContent.style.display = "none";
-    modalContentDeux.style.display = "block";
+    modalContentDeux.style.display = "flex";
     });
 
   const supprGalerie = document.createElement("p");
@@ -165,7 +165,7 @@ function previewImage(e) {
         imagePreview.style.display = "none";
         document.querySelector(".fa-image").style.display = "block";
         document.getElementById("buttonloadFile").style.display = "block";
-        document.getElementById("file").style.display = "block";
+        document.getElementById("file").style.display = "none";
         document.querySelector(".detailsImg").style.display = "block";
         removeImageButton.style.display = "none";
       }
@@ -174,7 +174,7 @@ function previewImage(e) {
       imagePreview.style.display = "none";
       document.querySelector(".fa-image").style.display = "block";
       document.getElementById("buttonloadFile").style.display = "block";
-      document.getElementById("file").style.display = "block";
+      document.getElementById("file").style.display = "none";
       document.querySelector(".detailsImg").style.display = "block";
       removeImageButton.style.display = "none";
     }
@@ -191,7 +191,7 @@ function previewImage(e) {
     imagePreview.style.display = "none";
     document.querySelector(".fa-image").style.display = "block";
     document.getElementById("buttonloadFile").style.display = "block";
-    document.getElementById("file").style.display = "block";
+    document.getElementById("file").style.display = "none";
     document.querySelector(".detailsImg").style.display = "block";
     removeImageButton.style.display = "none";
   });
