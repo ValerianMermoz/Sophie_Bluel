@@ -99,7 +99,7 @@ function modaleGallery(data) {
   boutonAjout.addEventListener("click", function () {
     modalContent.style.display = "none";
     modalContentDeux.style.display = "block";
-  });
+    });
 
   const supprGalerie = document.createElement("p");
   supprGalerie.textContent = "Supprimer la galerie";
@@ -165,18 +165,18 @@ function previewImage(e) {
         imagePreview.style.display = "none";
         document.querySelector(".fa-image").style.display = "block";
         document.getElementById("buttonloadFile").style.display = "block";
-        document.getElementById("file").style.display = "none";
+        document.getElementById("file").style.display = "block";
         document.querySelector(".detailsImg").style.display = "block";
-        removeImageButton.style.display = "block";
+        removeImageButton.style.display = "none";
       }
     } else {
       alert("Le fichier sélectionné n'est pas une image.");
       imagePreview.style.display = "none";
       document.querySelector(".fa-image").style.display = "block";
       document.getElementById("buttonloadFile").style.display = "block";
-      document.getElementById("file").style.display = "none";
+      document.getElementById("file").style.display = "block";
       document.querySelector(".detailsImg").style.display = "block";
-      removeImageButton.style.display = "block";
+      removeImageButton.style.display = "none";
     }
   } else {
     imagePreview.style.display = "none";
@@ -191,9 +191,9 @@ function previewImage(e) {
     imagePreview.style.display = "none";
     document.querySelector(".fa-image").style.display = "block";
     document.getElementById("buttonloadFile").style.display = "block";
-    document.getElementById("file").style.display = "none";
+    document.getElementById("file").style.display = "block";
     document.querySelector(".detailsImg").style.display = "block";
-    removeImageButton.style.display = "block";
+    removeImageButton.style.display = "none";
   });
 }
 
