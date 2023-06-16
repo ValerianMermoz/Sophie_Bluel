@@ -140,6 +140,7 @@ function deleteImage(imageId) {
 /* Ajout d'image*/
 function previewImage(e) {
   const imagePreview = document.getElementById("imgAjout");
+  const image = document.querySelector(".image");
   const removeImageButton = document.querySelector(".removeImageButton");
   const file = e.target.files[0]; // Vérifie si un fichier a été sélectionné
   if (file) {
@@ -150,6 +151,8 @@ function previewImage(e) {
         reader.onload = function (event) {
           imagePreview.src = event.target.result;
           imagePreview.style.width = "100%";
+          imagePreview.style.height = "250px";
+          image.style.width = "100%";
           imagePreview.style.objectFit = "cover";
           imagePreview.style.display = "block";
           document.querySelector(".fa-image").style.display = "none";
