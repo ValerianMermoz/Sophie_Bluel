@@ -42,3 +42,22 @@ document.querySelector(".login")
     })
     
   });
+
+  logout.addEventListener("click", function() {
+    window.localStorage.removeItem("token");
+    window.location.href="./index.html";
+ });
+
+ saveToken = function() {
+  const logout = document.getElementById("logout");
+  const login = document.getElementById("login");
+
+  if (window.localStorage.getItem("token")) {
+    login.style.display = "none";
+  } else {
+    logout.style.display = "none";
+    login.style.display = "flex";
+  }
+ }
+
+ saveToken();
