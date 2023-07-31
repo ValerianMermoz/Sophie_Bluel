@@ -32,7 +32,7 @@ document.querySelector(".login")
       if(data){
       localStorage.setItem('userId', data.userId);
       localStorage.setItem('token', data.token);
-      window.location.href="./index.html";
+      window.location.href="../index.html";
     }
       
     })
