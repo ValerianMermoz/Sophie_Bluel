@@ -6,5 +6,5 @@
 <li>Gérer les événements utilisateurs avec Javascript</li>
 
 <h2>Aperçu du projet</h2>
-<img src="https://github.com/ValerianMermoz/Sophie_Bluel/raw/main/FrontEnd/asssets/images/Overview.png">
-<img src="https://github.com/ValerianMermoz/Sophie_Bluel/raw/main/FrontEnd/asssets/images/Overview2.png">
+<img src="https://github.com/ValerianMermoz/Sophie_Bluel/raw/FrontEnd/asssets/images/Overview.png">
+<img src="https://github.com/ValerianMermoz/Sophie_Bluel/raw/FrontEnd/asssets/images/Overview2.png">
